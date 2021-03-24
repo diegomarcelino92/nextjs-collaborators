@@ -2,10 +2,7 @@ import React, { useEffect } from 'react';
 
 import { AppProps } from 'next/app';
 
-import { ThemeProvider as ThemeProviderMUI } from '@material-ui/core/styles';
-import { ThemeProvider as ThemeProviderSC } from 'styled-components';
-
-import theme from '@config/theme';
+import ThemeProvider from '@config/theme-provider';
 
 import { wrapper } from 'src/redux/store';
 
@@ -19,11 +16,9 @@ function App({ Component, pageProps }: AppProps) {
   }, []);
 
   return (
-    <ThemeProviderMUI theme={theme}>
-      <ThemeProviderSC theme={theme}>
-        <Component {...pageProps} />
-      </ThemeProviderSC>
-    </ThemeProviderMUI>
+    <ThemeProvider>
+      <Component {...pageProps} />
+    </ThemeProvider>
   );
 }
 

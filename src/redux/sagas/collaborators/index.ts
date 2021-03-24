@@ -1,6 +1,6 @@
 import { all, fork } from 'redux-saga/effects';
 
-import appSagas from './app';
+import appSagas from './collboratorsRequest';
 
 function* appSagass() {
   yield all([

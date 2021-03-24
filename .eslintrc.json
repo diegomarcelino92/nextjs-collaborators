@@ -60,6 +60,13 @@
 				"code": 80,
 				"tabWidth": 2
 			}
+		],
+		"no-undef": [
+			"error",
+			{
+				"React": true,
+				"typeof": true
+			}
 		]
 	}
 }
