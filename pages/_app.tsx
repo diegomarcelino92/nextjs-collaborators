@@ -2,9 +2,10 @@ import React, { useEffect } from 'react';
 
 import { AppProps } from 'next/app';
 
-import ThemeProvider from '@config/theme-provider';
-
 import { wrapper } from 'src/redux/store';
+
+import Layout from '@components/layout';
+import ThemeProvider from '@config/theme-provider';
 
 function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
@@ -17,7 +18,9 @@ function App({ Component, pageProps }: AppProps) {
 
   return (
     <ThemeProvider>
-      <Component {...pageProps} />
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
     </ThemeProvider>
   );
 }

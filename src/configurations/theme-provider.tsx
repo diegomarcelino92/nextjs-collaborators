@@ -1,36 +1,84 @@
-import { createContext, useState } from 'react';
+import React, {
+  createContext, useContext, useState,
+} from 'react';
 
-import { ThemeProvider as ThemeProviderMUI, createMuiTheme } from '@material-ui/core/styles';
-import { PaletteType } from '@material-ui/core';
+import { CssBaseline, PaletteType } from '@material-ui/core';
+import {
+  ThemeProvider as ThemeProviderMUI,
+  createMuiTheme,
+  responsiveFontSizes,
+} from '@material-ui/core/styles';
+
 import { ThemeProvider as ThemeProviderSC } from 'styled-components';
 
-const ThemeContext = createContext({})
+interface ThemeContextProps {
+  changeThemeMode: () => void;
+  themeType: PaletteType;
+}
 
-const themeMUI = (mode: PaletteType = 'light') => createMuiTheme({
-  palette: {
-    type: mode
-  }
+const ThemeContext = createContext<ThemeContextProps>({
+  themeType: 'light',
+  changeThemeMode() { },
 });
 
+const themeMUI = (mode: PaletteType = 'light') => responsiveFontSizes(createMuiTheme({
+  palette: {
+    type: mode,
+    primary: {
+      main: mode === 'light' ? '#72727E' : '#625F63',
+    },
+    secondary: {
+      main: mode === 'light' ? '#9893DA' : '#797A9E',
+    },
+  },
+  overrides: {
+    MuiCssBaseline: {
+      '@global': {
+        body: {
+          margin: 0,
+          display: 'flex',
+          justifyContent: 'center',
+        },
+        '#__next': {
+          height: '100vh',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          width: '100%',
+        },
+      },
+    },
+  },
+}));
+
 const ThemeProvider: React.FC = ({ children }) => {
-  const [theme, setTheme] = useState(themeMUI())
+  const [theme, setTheme] = useState(themeMUI());
 
   function changeThemeMode() {
     const themeMode: PaletteType = theme.palette.type;
-    const newTheme = themeMUI(themeMode === 'light' ? 'dark' : 'light')
-
-    setTheme(newTheme)
+    const newTheme = themeMUI(themeMode === 'light' ? 'dark' : 'light');
+    setTheme(newTheme);
   }
 
   return (
-    <ThemeContext.Provider value={{ changeThemeMode }}>
+    <ThemeContext.Provider value={{
+      changeThemeMode, themeType: theme.palette.type,
+    }}
+    >
       <ThemeProviderMUI theme={theme}>
         <ThemeProviderSC theme={theme}>
+          <CssBaseline />
           {children}
         </ThemeProviderSC>
       </ThemeProviderMUI>
     </ThemeContext.Provider>
-  )
-}
+  );
+};
 
-export default ThemeProvider
+export const useThemeMode = () => {
+  const context = useContext(ThemeContext);
+
+  return context;
+};
+
+export default ThemeProvider;

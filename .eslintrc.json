@@ -5,9 +5,11 @@
 		"node": true
 	},
 	"extends": [
+		"plugin:react/recommended",
+		"plugin:@typescript-eslint/recommended",
+		"plugin:@typescript-eslint/eslint-recommended",
 		"eslint:recommended",
 		"plugin:react-hooks/recommended",
-		"plugin:@typescript-eslint/recommended",
 		"plugin:react/recommended",
 		"airbnb"
 	],
@@ -25,6 +27,19 @@
 		"react-hooks"
 	],
 	"rules": {
+		"object-curly-newline": [
+			"error",
+			{
+				"ImportDeclaration": {
+					"multiline": true,
+					"minProperties": 3
+				}
+			}
+		],
+		"react/prop-types": "off",
+		"@typescript-eslint/no-unused-vars": [
+			"error"
+		],
 		"@typescript-eslint/explicit-module-boundary-types": "off",
 		"react/jsx-props-no-spreading": [
 			0
@@ -32,6 +47,9 @@
 		"react-hooks/rules-of-hooks": "error",
 		"react-hooks/exhaustive-deps": "warn",
 		"no-use-before-define": "off",
+		"@typescript-eslint/no-empty-function": [
+			0
+		],
 		"@typescript-eslint/no-use-before-define": [
 			"error"
 		],
@@ -57,15 +75,78 @@
 		"max-len": [
 			"error",
 			{
-				"code": 80,
+				"code": 90,
 				"tabWidth": 2
 			}
 		],
 		"no-undef": [
+			0
+		],
+		"import/order": [
 			"error",
 			{
-				"React": true,
-				"typeof": true
+				"alphabetize": {
+					"order": "asc",
+					"caseInsensitive": true
+				},
+				"newlines-between": "always",
+				"groups": [
+					"builtin",
+					"external",
+					"parent",
+					"sibling",
+					"index"
+				],
+				"pathGroups": [
+					{
+						"pattern": "react",
+						"group": "external",
+						"position": "before"
+					},
+					{
+						"pattern": "next/*",
+						"group": "external",
+						"position": "before"
+					},
+					{
+						"pattern": "react-redux",
+						"group": "external",
+						"position": "before"
+					},
+					{
+						"pattern": "redux",
+						"group": "external",
+						"position": "before"
+					},
+					{
+						"pattern": "redux-saga/**",
+						"group": "external",
+						"position": "before"
+					},
+					{
+						"pattern": "seamless-immutable",
+						"group": "external",
+						"position": "before"
+					},
+					{
+						"pattern": "@material-ui/**",
+						"group": "external",
+						"position": "before"
+					},
+					{
+						"pattern": "@*/**",
+						"group": "parent",
+						"position": "before"
+					},
+					{
+						"pattern": "./**",
+						"group": "parent",
+						"position": "after"
+					}
+				],
+				"pathGroupsExcludedImportTypes": [
+					"builtin"
+				]
 			}
 		]
 	}

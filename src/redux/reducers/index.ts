@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+
 import { ImmutableObject } from 'seamless-immutable';
 
 import collaborators, { CollaboratorsState } from './collaborators';

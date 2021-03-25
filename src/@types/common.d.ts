@@ -1,8 +1,8 @@
-declare type Collaborator = {
+declare interface Collaborator {
   id: string;
-  createdAt: string;
   name: string;
   avatar: string;
   company: string;
   role: string;
+  createdAt: string;
 }

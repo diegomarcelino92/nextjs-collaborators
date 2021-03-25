@@ -5,6 +5,7 @@ import Document, {
 } from 'next/document';
 
 import { ServerStyleSheets } from '@material-ui/core/styles';
+
 import { ServerStyleSheet } from 'styled-components';
 
 class DocumentComponent extends Document {
@@ -26,6 +27,7 @@ class DocumentComponent extends Document {
       styles: [
         ...React.Children.toArray(initialProps.styles),
         materialSheets.getStyleElement(),
+        styledSheets.getStyleElement(),
       ],
     };
   }
