@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import Link from 'next/link';
+
 import { ImmutableArray } from 'seamless-immutable';
 
 import {
@@ -78,14 +80,15 @@ const CollaboratorComponent: React.FC<CollaboratorComponentProps> = ({
 
         {showButton && (
           <Box width={{ sm: '100%', md: 'fit-content' }} padding="10px 0">
-            <Button
-              color="secondary"
-              href={createCollaboratorLink(name, id)}
-              title={`Ver ${name}`}
-              variant="outlined"
-            >
-              Ver colaborador
-            </Button>
+            <Link href={createCollaboratorLink(name, id)}>
+              <Button
+                color="secondary"
+                title={`Ver ${name}`}
+                variant="outlined"
+              >
+                Ver colaborador
+              </Button>
+            </Link>
           </Box>
         )}
 

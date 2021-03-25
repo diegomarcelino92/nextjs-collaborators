@@ -26,9 +26,7 @@ const mapDispatch = (dispatch) =>
 
 const connector = connect(mapState, mapDispatch);
 
-type PaginationFeedbackProps = ConnectedProps<typeof connector> & {
-  feedbackList: ImmutableArray<Feedback>;
-};
+type PaginationFeedbackProps = ConnectedProps<typeof connector>;
 
 const PaginationFeedback: React.FC<PaginationFeedbackProps> = ({
   paginateCollaboratorsFeedback,

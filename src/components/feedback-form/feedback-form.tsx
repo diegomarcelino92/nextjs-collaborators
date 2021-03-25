@@ -35,6 +35,10 @@ const FeedbackForm: React.FC<FeedbackFormProps> = ({
   onClose,
   open,
 }) => {
+  // PARA FORMULÁRIOS NORMALMENTE USO REACT-HOOK-FORM + YUP VALIDATOR
+  // INFELIZMENTE NA CORRERIA NÃO DEU TEMPO DE MELHORIA COMO ESSA
+  // TODO
+
   const [message, setMessage] = useState('');
 
   const isValid = message.length > 5;
@@ -68,6 +72,8 @@ const FeedbackForm: React.FC<FeedbackFormProps> = ({
             label="Descrição"
             error={!isValid}
             value={message}
+            rows={5}
+            multiline
             fullWidth
           />
           <Box padding="20px 0">
