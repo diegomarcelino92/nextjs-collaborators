@@ -20,7 +20,7 @@ npm run dev
 yarn dev
 ```
 
-Para rodar umas versão de producão:
+Para rodar em producão:
 
 ```
 npm run build
