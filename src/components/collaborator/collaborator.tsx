@@ -10,37 +10,47 @@ import {
   Typography,
 } from '@material-ui/core';
 
+import { createCollaboratorLink } from '@utils/formatters';
+
 import { StyledPaper } from './styles';
 
-type CollaboratorProps = Collaborator
+type CollaboratorComponentProps = Collaborator;
 
-const CollaboratorComponent: React.FC<CollaboratorProps> = ({
-  avatar, name, company, role,
+const CollaboratorComponent: React.FC<CollaboratorComponentProps> = ({
+  avatar,
+  name,
+  company,
+  role,
+  id,
 }) => (
   <Fade in>
     <StyledPaper>
       <ListItemAvatar>
         <Avatar src={avatar} alt={name} />
       </ListItemAvatar>
+
       <ListItemText
-        primary={(
+        primary={
           <Typography component="h6" variant="h6">
             {name}
           </Typography>
-        )}
-        secondary={(
+        }
+        secondary={
           <>
-            <Typography component="span">
-              {company}
-            </Typography>
+            <Typography component="span">{company}</Typography>
             {` - ${role}`}
           </>
-
-        )}
+        }
       />
 
       <Box width={{ sm: '100%', md: 'fit-content' }} padding="10px 0">
-        <Button variant="outlined">Ver colaborador</Button>
+        <Button
+          href={createCollaboratorLink(name, id)}
+          title={`Ver ${name}`}
+          variant="outlined"
+        >
+          Ver colaborador
+        </Button>
       </Box>
     </StyledPaper>
   </Fade>

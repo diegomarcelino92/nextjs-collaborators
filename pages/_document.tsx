@@ -1,7 +1,11 @@
 import React from 'react';
 
 import Document, {
-  DocumentContext, Html, Head, Main, NextScript,
+  DocumentContext,
+  Html,
+  Head,
+  Main,
+  NextScript,
 } from 'next/document';
 
 import { ServerStyleSheets } from '@material-ui/core/styles';
@@ -14,11 +18,13 @@ class DocumentComponent extends Document {
     const styledSheets = new ServerStyleSheet();
     const originalRenderPage = ctx.renderPage;
 
-    ctx.renderPage = () => originalRenderPage({
-      enhanceApp: (App) => (props) => materialSheets.collect(
-        styledSheets.collectStyles(<App {...props} />),
-      ),
-    });
+    ctx.renderPage = () =>
+      originalRenderPage({
+        enhanceApp: (App) => (props) =>
+          materialSheets.collect(
+            styledSheets.collectStyles(<App {...props} />)
+          ),
+      });
 
     const initialProps = await Document.getInitialProps(ctx);
 

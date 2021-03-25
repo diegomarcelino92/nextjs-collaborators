@@ -21,7 +21,7 @@ const mapDispatch = {
 
 const connector = connect(mapState, mapDispatch);
 
-type ListCollaboratorsProps = ConnectedProps<typeof connector>
+type ListCollaboratorsProps = ConnectedProps<typeof connector>;
 
 const ListCollaborators: React.FC<ListCollaboratorsProps> = ({ listPage }) => (
   <List id="list-collaborators">

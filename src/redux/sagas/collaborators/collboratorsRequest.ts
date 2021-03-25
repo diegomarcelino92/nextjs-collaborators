@@ -1,4 +1,6 @@
-import { put, takeLatest, call } from 'redux-saga/effects';
+import {
+ put, takeLatest, call 
+} from 'redux-saga/effects';
 
 import collaboratorsAPI from '@API/collaborator';
 import { Types, Creators } from '@reducers/collaborators';
@@ -6,7 +8,8 @@ import { Types, Creators } from '@reducers/collaborators';
 function* collboratorsRequest() {
   try {
     const { data }: { data: Collaborator[] } = yield call(
-      collaboratorsAPI.list, { url: '/collaborator' },
+      collaboratorsAPI.list,
+      { url: '/collaborator' },
     );
 
     yield put(Creators.collaboratorsSuccess(data));

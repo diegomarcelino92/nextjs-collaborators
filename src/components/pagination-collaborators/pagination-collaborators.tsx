@@ -15,13 +15,16 @@ const mapState = ({ collaborators }: RootState) => ({
   list: collaborators.getIn(['list']),
 });
 
-const mapDispatch = (dispatch) => bindActionCreators({
-  paginateCollaborators: Creators.paginateCollaborators,
-}, dispatch);
+const mapDispatch = (dispatch) => bindActionCreators(
+    {
+      paginateCollaborators: Creators.paginateCollaborators,
+    },
+    dispatch,
+  );
 
 const connector = connect(mapState, mapDispatch);
 
-type PaginationProps = ConnectedProps<typeof connector>
+type PaginationProps = ConnectedProps<typeof connector>;
 
 const PaginationCollaborators: React.FC<PaginationProps> = ({
   pages,

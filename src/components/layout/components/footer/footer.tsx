@@ -11,9 +11,7 @@ const Footer: React.FC = () => (
     width="100%"
     bgcolor="secondary.main"
   >
-    <Typography>
-      by diegomarcelino92
-    </Typography>
+    <Typography>by diegomarcelino92</Typography>
   </Box>
 );
 
