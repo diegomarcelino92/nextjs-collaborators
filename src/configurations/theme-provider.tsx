@@ -25,10 +25,10 @@ const themeMUI = (mode: PaletteType = 'light') =>
       palette: {
         type: mode,
         primary: {
-          main: mode === 'light' ? '#72727E' : '#625F63',
+          main: mode === 'light' ? '#797A9E' : '#444444',
         },
         secondary: {
-          main: mode === 'light' ? '#9893DA' : '#797A9E',
+          main: mode === 'light' ? '#797A9E' : '#797A9E',
         },
       },
       overrides: {

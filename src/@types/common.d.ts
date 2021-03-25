@@ -6,3 +6,11 @@ declare interface Collaborator {
   role: string;
   createdAt: string;
 }
+
+declare interface Feedback {
+  id: string;
+  collaboratorId: string;
+  createdAt: string;
+  message: string;
+  like: number;
+}

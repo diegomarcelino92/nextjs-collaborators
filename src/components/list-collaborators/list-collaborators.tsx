@@ -9,17 +9,11 @@ import { generate } from 'shortid';
 import CollaboratorComponent from '@components/collaborator/collaborator';
 import { RootState } from '@reducers/index';
 
-// import { Container } from './styles';
-
 const mapState = ({ collaborators }: RootState) => ({
   listPage: collaborators.getIn(['listPage']),
 });
 
-const mapDispatch = {
-  // toggleOn: () => ({ type: 'TOGGLE_IS_ON' })
-};
-
-const connector = connect(mapState, mapDispatch);
+const connector = connect(mapState);
 
 type ListCollaboratorsProps = ConnectedProps<typeof connector>;
 
@@ -27,7 +21,7 @@ const ListCollaborators: React.FC<ListCollaboratorsProps> = ({ listPage }) => (
   <List id="list-collaborators">
     {listPage.map((collaborator) => (
       <ListItem key={generate()}>
-        <CollaboratorComponent {...collaborator} />
+        <CollaboratorComponent {...collaborator} showButton />
       </ListItem>
     ))}
   </List>

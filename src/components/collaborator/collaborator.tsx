@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { ImmutableArray } from 'seamless-immutable';
+
 import {
   Avatar,
   Box,
@@ -10,16 +12,23 @@ import {
   Typography,
 } from '@material-ui/core';
 
+import CollaboratorFeedback from '@components/collaborator-feedback';
 import { createCollaboratorLink } from '@utils/formatters';
 
 import { StyledPaper } from './styles';
 
-type CollaboratorComponentProps = Collaborator;
+type CollaboratorComponentProps = Collaborator & {
+  feedbackList?: ImmutableArray<Feedback>;
+  showButton?: boolean;
+};
 
 const CollaboratorComponent: React.FC<CollaboratorComponentProps> = ({
+  feedbackList,
+  showButton,
+  createdAt,
+  company,
   avatar,
   name,
-  company,
   role,
   id,
 }) => (
@@ -31,27 +40,35 @@ const CollaboratorComponent: React.FC<CollaboratorComponentProps> = ({
 
       <ListItemText
         primary={
-          <Typography component="h6" variant="h6">
+          <Typography component="h5" variant="h5">
             {name}
           </Typography>
         }
+        secondaryTypographyProps={{ component: 'h6' }}
         secondary={
           <>
-            <Typography component="span">{company}</Typography>
-            {` - ${role}`}
+            <Box>
+              <Typography component="span">{company}</Typography>
+              {` - ${role}`}
+            </Box>
+            <Typography component="span">{createdAt}</Typography>
           </>
         }
       />
 
-      <Box width={{ sm: '100%', md: 'fit-content' }} padding="10px 0">
-        <Button
-          href={createCollaboratorLink(name, id)}
-          title={`Ver ${name}`}
-          variant="outlined"
-        >
-          Ver colaborador
-        </Button>
-      </Box>
+      {showButton && (
+        <Box width={{ sm: '100%', md: 'fit-content' }} padding="10px 0">
+          <Button
+            href={createCollaboratorLink(name, id)}
+            title={`Ver ${name}`}
+            variant="outlined"
+          >
+            Ver colaborador
+          </Button>
+        </Box>
+      )}
+
+      <CollaboratorFeedback feedbackList={feedbackList} />
     </StyledPaper>
   </Fade>
 );

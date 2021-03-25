@@ -15,11 +15,12 @@ const mapState = ({ collaborators }: RootState) => ({
   list: collaborators.getIn(['list']),
 });
 
-const mapDispatch = (dispatch) => bindActionCreators(
+const mapDispatch = (dispatch) =>
+  bindActionCreators(
     {
       paginateCollaborators: Creators.paginateCollaborators,
     },
-    dispatch,
+    dispatch
   );
 
 const connector = connect(mapState, mapDispatch);

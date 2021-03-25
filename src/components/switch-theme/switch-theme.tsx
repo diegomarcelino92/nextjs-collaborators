@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Switch } from '@material-ui/core';
+import { FormControlLabel, Switch } from '@material-ui/core';
 
 import { useThemeMode } from '@config/theme-provider';
 
@@ -8,11 +8,15 @@ const SwitchTheme: React.FC = () => {
   const { themeType, changeThemeMode } = useThemeMode();
 
   return (
-    <Switch
-      checked={themeType === 'dark'}
-      name="checkedA"
-      inputProps={{ 'aria-label': 'secondary checkbox' }}
-      onChange={changeThemeMode}
+    <FormControlLabel
+      control={
+        <Switch
+          title="sdasdf"
+          checked={themeType === 'dark'}
+          onChange={changeThemeMode}
+        />
+      }
+      label="Dark-mode"
     />
   );
 };
