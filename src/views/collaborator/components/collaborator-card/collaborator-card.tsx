@@ -7,7 +7,7 @@ import { RootState } from '@reducers/index';
 
 const mapState = ({ collaborators }: RootState) => ({
   collaborator: collaborators.getIn(['collaborator']),
-  collaboratorFeedback: collaborators.getIn(['collaboratorFeedback']),
+  collaboratorFeedback: collaborators.getIn(['collaboratorFeedbackListPage']),
 });
 
 const connector = connect(mapState);
@@ -19,8 +19,10 @@ const CollaboratorCard: React.FC<ListCollaboratorsProps> = ({
   collaboratorFeedback,
 }) => (
   <CollaboratorComponent
-    {...collaborator}
     feedbackList={collaboratorFeedback}
+    {...collaborator}
+    showForm
+    showInfo
   />
 );
 

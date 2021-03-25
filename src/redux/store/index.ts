@@ -1,12 +1,8 @@
-import {
- createStore, applyMiddleware, Store, AnyAction 
-} from 'redux';
+import { createStore, applyMiddleware, Store, AnyAction } from 'redux';
 
 import immutable from 'seamless-immutable';
 
-import {
- MakeStore, createWrapper, HYDRATE 
-} from 'next-redux-wrapper';
+import { MakeStore, createWrapper, HYDRATE } from 'next-redux-wrapper';
 import { composeWithDevTools } from 'redux-devtools-extension/logOnlyInProduction';
 import createSagaMiddleware, { Task } from 'redux-saga';
 
@@ -33,7 +29,7 @@ export const makeStore: MakeStore<RootState> = () => {
 
   const store = createStore(
     immutable(wrappedRootReducer),
-    composeWithDevTools(applyMiddleware(sagaMiddleware)),
+    composeWithDevTools(applyMiddleware(sagaMiddleware))
   );
 
   (store as SagaStore).sagaTask = sagaMiddleware.run(rootSaga);
@@ -41,4 +37,4 @@ export const makeStore: MakeStore<RootState> = () => {
   return store;
 };
 
-export const wrapper = createWrapper<RootState>(makeStore, { debug: true });
+export const wrapper = createWrapper<RootState>(makeStore);

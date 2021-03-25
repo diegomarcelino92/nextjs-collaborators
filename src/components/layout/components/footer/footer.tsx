@@ -9,7 +9,7 @@ const Footer: React.FC = () => (
     justifyContent="center"
     padding="50px 10px"
     width="100%"
-    bgcolor="secondary.main"
+    bgcolor="primary.main"
   >
     <Typography>by diegomarcelino92</Typography>
   </Box>

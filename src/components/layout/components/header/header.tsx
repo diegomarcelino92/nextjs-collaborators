@@ -1,21 +1,28 @@
 import React from 'react';
 
-import { Box } from '@material-ui/core';
+import { Box, IconButton } from '@material-ui/core';
+import { Home } from '@material-ui/icons';
 
 import SwitchTheme from '@components/switch-theme';
-
-import { Container } from './styles';
+import { MAX_WIDTH } from '@utils/contants';
 
 const Header: React.FC = () => (
   <Box
     component="header"
-    padding="20px 10px"
+    padding="10px"
     display="flex"
     justifyContent="center"
     bgcolor="primary.main"
     width="100%"
   >
-    <SwitchTheme />
+    <Box display="flex" flex="1" maxWidth={MAX_WIDTH}>
+      <Box flex="1">
+        <IconButton href="/">
+          <Home fontSize="large" />
+        </IconButton>
+      </Box>
+      <SwitchTheme />
+    </Box>
   </Box>
 );
 

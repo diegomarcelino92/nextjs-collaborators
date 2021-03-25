@@ -10,7 +10,9 @@ const CollaboratorPage = () => <Collaborator />;
 
 export const getServerSideProps = wrapper.getServerSideProps(
   async ({ store, params }) => {
-    const collboratorId = params.collaborator.replace(/.*-id-/g, '');
+    const param = params.collaborator as string;
+
+    const collboratorId = param.replace(/.*-id-/g, '');
 
     store.dispatch(Creators.collaboratorRequest(collboratorId));
     store.dispatch(Creators.collaboratorFeedbackRequest(collboratorId));

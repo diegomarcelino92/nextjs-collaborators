@@ -10,6 +10,7 @@ import {
   Badge,
   Box,
   CircularProgress,
+  Fade,
   IconButton,
   List,
   ListItem,
@@ -19,14 +20,16 @@ import {
 } from '@material-ui/core';
 import { Delete, ThumbUp } from '@material-ui/icons';
 
-import dayjs from 'dayjs';
-
+import PaginationFeedback from '@components/pagination-feedback';
 import { Creators } from '@reducers/collaborators';
 import { RootState } from '@reducers/index';
 import { diffInMin } from '@utils/date';
 
 const mapState = ({ collaborators }: RootState) => ({
   loading: collaborators.getIn(['loading']),
+  show: collaborators.getIn(['feedbackShow']),
+  pages: collaborators.getIn(['feedbackPages']),
+  list: collaborators.getIn(['collaboratorFeedbackList']),
 });
 
 const mapDispatch = (dispatch) =>
@@ -57,7 +60,6 @@ const CollaboratorFeedback: React.FC<CollaboratorFeedbackProps> = ({
           {feedbackList.map((feed) => (
             <ListItem divider key={feed.id}>
               <ListItemText primary={<Typography>{feed.message}</Typography>} />
-              {console.log(diffInMin(feed.createdAt))}
 
               <ListItemSecondaryAction>
                 <IconButton
@@ -68,20 +70,24 @@ const CollaboratorFeedback: React.FC<CollaboratorFeedbackProps> = ({
                     {loading && (
                       <CircularProgress color="secondary" size={23} />
                     )}
-                    {!loading && <ThumbUp />}
+                    {!loading && <ThumbUp fontSize="small" />}
                   </Badge>
                 </IconButton>
 
-                <IconButton
-                  onClick={() => deleteFeedbackRequest(feed)}
-                  disabled={loading}
-                >
-                  <Delete />
-                </IconButton>
+                <Fade in={!diffInMin(feed.createdAt, 5)}>
+                  <IconButton
+                    onClick={() => deleteFeedbackRequest(feed)}
+                    disabled={loading}
+                  >
+                    <Delete fontSize="small" />
+                  </IconButton>
+                </Fade>
               </ListItemSecondaryAction>
             </ListItem>
           ))}
         </List>
+
+        <PaginationFeedback />
       </Box>
     )}
   </>

@@ -22,12 +22,14 @@ function Pagination<T>({
   show,
 }: PaginationProps<T>) {
   function onChange(_, page: number) {
-    const newList = list.slice((page - 1) * show, page * show);
+    if (list) {
+      const newList = list.slice((page - 1) * show, page * show);
 
-    onPaginate(newList);
+      onPaginate(newList);
 
-    if (idAnchorList) {
-      anchorTo(idAnchorList);
+      if (idAnchorList) {
+        anchorTo(idAnchorList);
+      }
     }
   }
 

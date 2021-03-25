@@ -14,6 +14,9 @@ export default {
   },
 
   feedback: {
+    send: (data: unknown, collaboratorId?: string) =>
+      API.post(`/collaborator/${collaboratorId}/feedback`, data),
+
     like: (data: unknown, collaboratorId?: string, feedbackId?: string) =>
       API.put(`/collaborator/${collaboratorId}/feedback/${feedbackId}`, data),
 

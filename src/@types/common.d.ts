@@ -8,9 +8,9 @@ declare interface Collaborator {
 }
 
 declare interface Feedback {
-  id: string;
-  collaboratorId: string;
-  createdAt: string;
-  message: string;
-  like: number;
+  id?: string;
+  collaboratorId?: string;
+  createdAt?: string;
+  message?: string;
+  like?: number;
 }

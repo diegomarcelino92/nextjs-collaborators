@@ -1,4 +1,4 @@
-import { Paper } from '@material-ui/core';
+import { Paper, Typography } from '@material-ui/core';
 
 import styled from 'styled-components';
 
@@ -9,3 +9,7 @@ export const StyledPaper = styled(Paper)`
   align-items: center;
   padding: 20px;
 `;
+
+export const StyledTypography = styled(Typography)`
+  font-style: italic;
+` as typeof Typography;

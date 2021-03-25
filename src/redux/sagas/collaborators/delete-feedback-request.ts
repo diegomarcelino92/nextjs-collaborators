@@ -10,6 +10,7 @@ function* deleteFeedbackRequest({ feedback }: AnyAction) {
     const { collaborators } = yield select((state) => state);
 
     const collaboratorId = collaborators.getIn(['collaborator', 'id']);
+    const list = collaborators.getIn(['collaboratorFeedbackListPage']);
 
     const { data }: { data: Feedback } = yield call(
       collaboratorsAPI.feedback.delete,
@@ -18,6 +19,10 @@ function* deleteFeedbackRequest({ feedback }: AnyAction) {
     );
 
     yield put(Creators.deleteFeedbackSuccess(data));
+
+    if (list.length <= 1) {
+      yield put(Creators.collaboratorFeedbackRequest(collaboratorId));
+    }
   } catch (error) {
     yield put(Creators.deleteFeedbackError(error));
   }

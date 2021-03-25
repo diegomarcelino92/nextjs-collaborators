@@ -1,26 +1,14 @@
 import dayjs from 'dayjs';
-import 'dayjs/locale/pt-br';
-import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
 
-dayjs.locale('pt-br');
-dayjs.extend(isSameOrBefore);
-
-export const diffInMin = (date: string) => {
+export const diffInMin = (date: string, min: number): boolean => {
   if (date) {
-    const teste = Date.now();
-
-    const today = new Date().getTime();
-    const cris = new Date(date).getTime();
-    const diffMs = today - cris; // milliseconds between now & Christmas
-    const diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000);
-
-    console.log(diffMins);
-
     const before = dayjs(date);
-    const now = dayjs(teste);
+    const now = dayjs(new Date());
 
-    console.log(now.diff(before, 'minutes'));
+    return now.diff(before, 'minutes') > min;
   }
 
-  return 'Invalid date';
+  return false;
 };
+
+export const toLocaleDate = (date) => dayjs(date).format('DD/MM/YYYY');

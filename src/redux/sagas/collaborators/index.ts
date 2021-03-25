@@ -1,10 +1,11 @@
 import { all, fork } from 'redux-saga/effects';
 
-import collaboratorFeebackRequest from './collaboratorFeebackRequest';
-import collaboratorRequest from './collaboratorRequest';
-import collboratorsRequest from './collaboratorsRequest';
-import deleteFeedbackRequest from './deleteFeedbackRequest';
-import likeFeedbackRequest from './likeFeedbackRequest';
+import collaboratorFeebackRequest from './collaborator-feeback-request';
+import collaboratorRequest from './collaborator-request';
+import collboratorsRequest from './collaborators-request';
+import deleteFeedbackRequest from './delete-feedback-request';
+import likeFeedbackRequest from './like-feedback-request';
+import sendFeedbackRequest from './send-feedback-request';
 
 function* appSagass() {
   yield all([
@@ -13,6 +14,7 @@ function* appSagass() {
     fork(collaboratorFeebackRequest),
     fork(likeFeedbackRequest),
     fork(deleteFeedbackRequest),
+    fork(sendFeedbackRequest),
   ]);
 }
 
