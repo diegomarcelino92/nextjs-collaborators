@@ -2,6 +2,8 @@
 
 Projeto de teste com Typescript, todos as configurações foram feitas seguindo as respectivas documentações de cada ferramenta. Next JS + Redux + Redux-saga + Material-UI + Styled-components + Duck Pattern com Reduxsauce + Immutable.
 
+Recomendo o uso da extensão Redux dev tools do Chrome, para visulizar as ações e a manipulação do dados.
+
 Para rodar o projeto é necessário criar um arquivo '.env' substituindo a env var do arquivo '.env.example' pela url da API.
 
 Feito isso...
