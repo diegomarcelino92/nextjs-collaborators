@@ -3,6 +3,7 @@ import { AnyAction } from 'redux';
 import { put, takeLatest, call, select } from 'redux-saga/effects';
 
 import collaboratorsAPI from '@API/collaborator';
+import { Creators as AppCreators } from '@reducers/app';
 import { Types, Creators } from '@reducers/collaborators';
 
 function* deleteFeedbackRequest({ feedback }: AnyAction) {
@@ -12,7 +13,7 @@ function* deleteFeedbackRequest({ feedback }: AnyAction) {
     const collaboratorId = collaborators.getIn(['collaborator', 'id']);
     const list = collaborators.getIn(['collaboratorFeedbackListPage']);
 
-    const { data }: { data: Feedback } = yield call(
+    const { data = {} }: { data: Feedback } = yield call(
       collaboratorsAPI.feedback.delete,
       collaboratorId,
       feedback.id
@@ -24,7 +25,14 @@ function* deleteFeedbackRequest({ feedback }: AnyAction) {
       yield put(Creators.collaboratorFeedbackRequest(collaboratorId));
     }
   } catch (error) {
-    yield put(Creators.deleteFeedbackError(error));
+    yield put(Creators.deleteFeedbackError({ error: true }));
+    yield put(
+      AppCreators.snackbarRequest({
+        open: true,
+        severity: 'error',
+        message: 'Houve algum erro ao deletar feedback',
+      })
+    );
   }
 }
 

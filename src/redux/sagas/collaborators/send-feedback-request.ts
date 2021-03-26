@@ -14,7 +14,7 @@ function* sendFeedbackRequest({ feedback }: AnyAction) {
     const show = collaborators.getIn(['feedbackShow']);
     const list = collaborators.getIn(['collaboratorFeedbackListPage']);
 
-    const { data }: { data: Feedback } = yield call(
+    const { data = {} }: { data: Feedback } = yield call(
       collaboratorsAPI.feedback.send,
       {
         ...feedback,
@@ -37,6 +37,7 @@ function* sendFeedbackRequest({ feedback }: AnyAction) {
       yield put(Creators.collaboratorFeedbackRequest(collaboratorId));
     }
   } catch (error) {
+    yield put(Creators.sendFeedbackError({ error: true }));
     yield put(
       AppCreators.snackbarRequest({
         open: true,
@@ -44,7 +45,6 @@ function* sendFeedbackRequest({ feedback }: AnyAction) {
         message: 'Houve algum erro ao enviar feedback',
       })
     );
-    yield put(Creators.sendFeedbackError(error));
   }
 }
 
