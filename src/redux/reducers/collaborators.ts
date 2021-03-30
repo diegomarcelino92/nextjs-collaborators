@@ -7,6 +7,7 @@ import {
   updatingByIdArrayMerger,
   concatArrayMerger,
 } from 'seamless-immutable-mergers';
+import { FAKE_USER, FAKE_USERS } from 'src/data/users';
 
 interface CollaboratorTypes {
   PAGINATE_COLLABORATORS: string;
@@ -102,18 +103,11 @@ export interface CollaboratorsState {
 
 const INITIAL_STATE = immutable<CollaboratorsState>({
   loading: false,
-  list: [],
-  listPage: [],
-  pages: 0,
+  list: FAKE_USERS,
+  listPage: FAKE_USERS.slice(0, 10),
+  pages: 2,
   show: 10,
-  collaborator: {
-    id: '',
-    avatar: '',
-    company: '',
-    createdAt: '',
-    name: '',
-    role: '',
-  },
+  collaborator: FAKE_USER,
   collaboratorFeedbackList: [],
   collaboratorFeedbackListPage: [],
   feedbackPages: 0,
